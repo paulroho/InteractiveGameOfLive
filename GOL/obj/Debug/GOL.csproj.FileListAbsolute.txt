@@ -1,0 +1,5 @@
+c:\users\pro\documents\visual studio 2012\Projects\GOL\GOL\bin\GOL.dll
+c:\users\pro\documents\visual studio 2012\Projects\GOL\GOL\bin\GOL.pdb
+c:\users\pro\documents\visual studio 2012\Projects\GOL\GOL\obj\Debug\GOL.csprojResolveAssemblyReference.cache
+c:\users\pro\documents\visual studio 2012\Projects\GOL\GOL\obj\Debug\GOL.dll
+c:\users\pro\documents\visual studio 2012\Projects\GOL\GOL\obj\Debug\GOL.pdb
