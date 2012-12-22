@@ -23,13 +23,17 @@ section#header {
 
 #controlBlock {
     float: left;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 #controlBlock button {
-    /*background-color: white;*/
     border-radius: 5px;
     border-style: solid;
     border-color: gray;
+}
+
+.majorButton {
     font-size: large;
 }
 
