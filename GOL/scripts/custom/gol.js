@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    var game = new GameOfLife(50, 100);
+    var game = new GameOfLife(50, 70);
     $(game).bind('started', function() {
         $('#btnStart').attr('disabled', 'disabled');
         $('#btnNextGen').attr('disabled', 'disabled');
@@ -9,6 +9,18 @@
         $('#btnPause').attr('disabled', 'disabled');
         $('#btnStart').removeAttr('disabled');
         $('#btnNextGen').removeAttr('disabled');
+
+        (function(headerText, message) {
+            $('#toast .heading').text(headerText);
+            $('#toast .detail').text(message);
+            $('#toast').css('visibility','visible').css('opacity', '0.6');
+            setInterval(function() {
+                $('#toast').css('opacity', '0');
+                setInterval(function() {
+                    $('#toast').css('visibility', 'hidden');
+                }, 500);
+            }, 3000);
+        })('Game Over', 'There are no more living cells');
     });
     game.initPlayground();
 

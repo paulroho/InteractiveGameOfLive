@@ -19,6 +19,7 @@ section#header {
 #headerBlock h1 {
     font-size: 36pt;
     margin-top: 0;
+    margin-bottom: 0;
 }
 
 #controlBlock {
@@ -49,6 +50,46 @@ section#header {
 
 #btnPause {
     background-color: yellow;
+}
+
+.info {
+    font-size: smaller;
+    color: darkseagreen;
+}
+
+#playGroundSection {
+    float: left;
+    position: relative;
+}
+
+#toast {
+    visibility: hidden;
+    position: absolute;
+    top:30%;
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    width: 80%;
+    margin: 10%;
+    border-radius: .2em;
+    font-size: larger;
+    opacity: 0;
+    -webkit-transition: opacity 0.25s ease-out;  /* Saf3.2+, Chrome */
+	-moz-transition: opacity 0.25s ease-out;  /* FF4+ */
+	-ms-transition: opacity 0.25s ease-out;  /* IE10? */
+	-o-transition: opacity 0.25s ease-out;  /* Opera 10.5+ */
+	transition: opacity 0.25s ease-out;
+}
+
+#toast .heading {
+    background-color: black;
+    color: white;
+    margin: 0;
+}
+
+#toast .detail {
+    color: black;
 }
 
 table#playground {
