@@ -4,15 +4,47 @@
     color: white;
 }
 
-h1 {
-    font-size: 36pt;
+section#header {
+    overflow: auto;
+}
+
+#headerBlock {
     float: left;
-    margin-top: .5ex;
+    margin: 0 10px 10px 0;
+}
+
+#headerBlock p {
+    margin-bottom: 0;
+}
+#headerBlock h1 {
+    font-size: 36pt;
+    margin-top: 0;
 }
 
 #controlBlock {
-    margin-top: 18pt;
-    float: right;
+    float: left;
+}
+
+#controlBlock button {
+    /*background-color: white;*/
+    border-radius: 5px;
+    border-style: solid;
+    border-color: gray;
+    font-size: large;
+}
+
+#controlBlock button:disabled {
+    color: gray;
+    background-color: lightgray;
+}
+
+#btnStart {
+    background-color: green;
+    color: white;
+}
+
+#btnPause {
+    background-color: yellow;
 }
 
 table#playground {
