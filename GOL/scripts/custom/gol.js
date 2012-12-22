@@ -92,8 +92,10 @@ var GameOfLife = (function () {
     gameOfLife.prototype.start = function () {
         var that = this;
         timer = setInterval(function() {
-            that.calculateNextGen();
+            var someAreLiving = that.calculateNextGen();
             that.switchToNextGen();
+            if (!someAreLiving)
+                that.pause();
         }, 100);
         $(this).trigger('started');
     };
@@ -160,6 +162,7 @@ var GameOfLife = (function () {
     };
     
     gameOfLife.prototype.calculateNextGen = function () {
+        var someAreLiving = false;
         for (var row = 0; row < rowNum; row++) {
             for (var col = 0; col < colNum; col++) {
                 var livingNbCnt = getLivingNeighbourCount(row, col);
@@ -171,8 +174,11 @@ var GameOfLife = (function () {
                     willBeAlive = getWillBeAliveForDeadCell(livingNbCnt);
                 }
                 setAliveStateNextGen(row, col, willBeAlive);
+                if (willBeAlive)
+                    someAreLiving = true;
             }
         }
+        return someAreLiving;
     };
 
     gameOfLife.prototype.switchToNextGen = function() {
