@@ -4,6 +4,7 @@
 
     $('#btnStart').click(function () {
         $(this).attr('disabled', 'disabled');
+        $('#btnNextGen').attr('disabled', 'disabled');
         $('#btnPause').removeAttr('disabled');
         game.start();
     });
@@ -11,6 +12,7 @@
     $('#btnPause').click(function () {
         $(this).attr('disabled', 'disabled');
         $('#btnStart').removeAttr('disabled');
+        $('#btnNextGen').removeAttr('disabled');
         game.pause();
     });
 
