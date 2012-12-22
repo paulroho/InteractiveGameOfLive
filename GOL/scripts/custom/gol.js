@@ -1,18 +1,22 @@
 ﻿$(document).ready(function () {
     var game = new GameOfLife(50, 100);
+    $(game).bind('started', function() {
+        $('#btnStart').attr('disabled', 'disabled');
+        $('#btnNextGen').attr('disabled', 'disabled');
+        $('#btnPause').removeAttr('disabled');
+    });
+    $(game).bind('paused', function() {
+        $('#btnPause').attr('disabled', 'disabled');
+        $('#btnStart').removeAttr('disabled');
+        $('#btnNextGen').removeAttr('disabled');
+    });
     game.initPlayground();
 
     $('#btnStart').click(function () {
-        $(this).attr('disabled', 'disabled');
-        $('#btnNextGen').attr('disabled', 'disabled');
-        $('#btnPause').removeAttr('disabled');
         game.start();
     });
 
     $('#btnPause').click(function () {
-        $(this).attr('disabled', 'disabled');
-        $('#btnStart').removeAttr('disabled');
-        $('#btnNextGen').removeAttr('disabled');
         game.pause();
     });
 
@@ -91,6 +95,7 @@ var GameOfLife = (function () {
             that.calculateNextGen();
             that.switchToNextGen();
         }, 100);
+        $(this).trigger('started');
     };
 
     var initMatrix = function() {
@@ -251,6 +256,7 @@ var GameOfLife = (function () {
     
     gameOfLife.prototype.pause = function() {
         clearInterval(timer);
+        $(this).trigger('paused');
     };
 
     gameOfLife.prototype.reset = function () {
