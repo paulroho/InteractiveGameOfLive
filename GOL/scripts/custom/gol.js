@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    var game = new GameOfLife(80, 120);
+    var game = new GameOfLife(50, 100);
     game.initPlayground();
 
     $('#btnStart').click(function () {

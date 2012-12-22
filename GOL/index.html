@@ -4,19 +4,21 @@
     <title>Game of Life</title>
     <link href="gol.css" rel="stylesheet"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="jquery-1.8.3.min.js"><\/script>')</script>
+    <script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="scripts/jquery-1.8.3.min.js"><\/script>')</script>
     <!-- TODO: Add fallback to local jQuery -->
-    <script src="gol.js" type="text/javascript"></script>
+    <script src="scripts/custom/gol.js" type="text/javascript"></script>
 </head>
     <body>
         <h1>The Interactive Game of Life</h1>
         <table id="playground">
         </table>
-        <button id="btnStart">Start</button>
-        <button id="btnPause" disabled="disabled">Pause</button>
-        <button id="btnNextGen">Next Generation</button>
-        <button id="btnReset">Reset</button>
-        <br/>
-        <button id="btnInvert">Invert</button>
+        <div>
+            <button id="btnStart">Start</button>
+            <button id="btnPause" disabled="disabled">Pause</button>
+            <button id="btnNextGen">Next Generation</button>
+            <button id="btnReset">Reset</button>
+            <br/>
+            <button id="btnInvert">Invert</button>
+        </div>
     </body>
 </html>
