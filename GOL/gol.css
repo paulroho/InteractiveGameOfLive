@@ -6,6 +6,13 @@
 
 h1 {
     font-size: 36pt;
+    float: left;
+    margin-top: .5ex;
+}
+
+#controlBlock {
+    margin-top: 18pt;
+    float: right;
 }
 
 table#playground {
