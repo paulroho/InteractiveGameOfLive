@@ -10,6 +10,7 @@
         $('#btnStart').removeAttr('disabled');
         $('#btnNextGen').removeAttr('disabled');
 
+		// BUG: The time this toast is displayed gets shorter and shorter until it is not perceivable at all.
         (function(headerText, message) {
             $('#toast .heading').text(headerText);
             $('#toast .detail').text(message);
