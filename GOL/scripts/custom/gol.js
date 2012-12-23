@@ -23,6 +23,9 @@
             }, 3000);
         })('Game Over', 'There are no more living cells');
     });
+	$(game).bind('generationChanged', function(event, generation) {
+		$('#generationInfo').text("Generation #" + generation);
+	});
     game.initPlayground();
 
     $('#btnStart').click(function () {
@@ -76,8 +79,11 @@ var GameOfLife = (function () {
     var currGen;
     var nextGen;
     var timer;
+    var generationCount;
+	var that;
     
     function gameOfLife(rownum, colnum) {
+		that = this;
         rowNum = rownum;
         colNum = colnum;
         matrix = new Array(1);
@@ -100,10 +106,20 @@ var GameOfLife = (function () {
         matrix = new Array(2);
         matrix[currGen] = initMatrix();
         matrix[nextGen] = initMatrix();
+		resetGenerationCount();
     };
+	
+	var resetGenerationCount = function(){
+	   generationCount = 0;
+	   $(that).trigger('generationChanged', generationCount);
+	};
+	
+	var incrementGenerationCount = function(){
+	   generationCount++;
+	   $(that).trigger('generationChanged', generationCount);
+	};
 
     gameOfLife.prototype.start = function () {
-        var that = this;
         timer = setInterval(function() {
             var someAreLiving = that.calculateNextGen();
             that.switchToNextGen();
@@ -197,6 +213,7 @@ var GameOfLife = (function () {
     gameOfLife.prototype.switchToNextGen = function() {
         currGen = 1 - currGen;
         nextGen = 1 - nextGen;
+		incrementGenerationCount();
         updateDisplay();
     };
 
@@ -280,6 +297,7 @@ var GameOfLife = (function () {
 
     gameOfLife.prototype.reset = function () {
         this.resetPlayground();
+		resetGenerationCount();
     };
 
     return gameOfLife;
