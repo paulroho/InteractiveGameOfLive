@@ -100,10 +100,12 @@ table#playground {
     border-style: solid;
     border-color: gray;
     border-width: 1px;
+    border-spacing:1px;
 }
 
 td {
-    padding: 4px;
+    width: 8px;
+    height: 8px;
     background-color: #222;
 }
 
