@@ -9,10 +9,15 @@
         $('#btnPause').attr('disabled', 'disabled');
         $('#btnStart').removeAttr('disabled');
         $('#btnNextGen').removeAttr('disabled');
+    });
+    $(game).bind('gameOver', function(event, generation) {
+        $('#btnPause').attr('disabled', 'disabled');
+        $('#btnStart').removeAttr('disabled');
+        $('#btnNextGen').removeAttr('disabled');
 
-        (function(headerText, message) {
+        (function (headerText, message) {
             $('#toast .heading').text(headerText);
-            $('#toast .detail').text(message);
+            $('#toast .detail').html(message);
             $('#toast').css('visibility','visible').css('opacity', '0.6');
             setTimeout(function() {
                 $('#toast').css('opacity', '0');
@@ -20,7 +25,7 @@
                     $('#toast').css('visibility', 'hidden');
                 }, 500);
             }, 3000);
-        })('Game Over', 'There are no more living cells');
+        })('Game Over', 'There are no more living cells.<br/>Your game survived for ' + generation + ' generations.');
     });
 	$(game).bind('generationChanged', function(event, generation) {
 		$('#generationInfo').text("Generation #" + generation);
@@ -123,7 +128,7 @@ var GameOfLife = (function () {
             var someAreLiving = that.calculateNextGen();
             that.switchToNextGen();
             if (!someAreLiving)
-                that.pause();
+                gameOver();
         }, 100);
         $(this).trigger('started');
     };
@@ -297,6 +302,12 @@ var GameOfLife = (function () {
     gameOfLife.prototype.reset = function () {
         this.resetPlayground();
 		resetGenerationCount();
+    };
+
+    gameOver = function () {
+        clearInterval(timer);
+        $(that).trigger('gameOver', generationCount);
+        resetGenerationCount();
     };
 
     return gameOfLife;
