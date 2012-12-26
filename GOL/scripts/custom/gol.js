@@ -1,18 +1,21 @@
 ﻿$(document).ready(function () {
     var game = new GameOfLife(50, 70);
-    $(game).bind('started', function() {
+    $(game).bind('started', function () {
         $('#btnStart').attr('disabled', 'disabled');
-        $('#btnNextGen').attr('disabled', 'disabled');
+        $('#btnResume').attr('disabled', 'disabled');
         $('#btnPause').removeAttr('disabled');
+        $('#btnNextGen').attr('disabled', 'disabled');
     });
-    $(game).bind('paused', function() {
-        $('#btnPause').attr('disabled', 'disabled');
+    $(game).bind('paused', function () {
         $('#btnStart').removeAttr('disabled');
+        $('#btnResume').removeAttr('disabled');
         $('#btnNextGen').removeAttr('disabled');
+        $('#btnPause').attr('disabled', 'disabled');
     });
     $(game).bind('gameOver', function(event, generation) {
-        $('#btnPause').attr('disabled', 'disabled');
         $('#btnStart').removeAttr('disabled');
+        $('#btnResume').attr('disabled');
+        $('#btnPause').attr('disabled', 'disabled');
         $('#btnNextGen').removeAttr('disabled');
 
         (function (headerText, message) {
@@ -38,6 +41,10 @@
 
     $('#btnStart').click(function () {
         game.start();
+    });
+
+    $('#btnResume').click(function () {
+        game.resume();
     });
 
     $('#btnPause').click(function () {
@@ -130,16 +137,24 @@ var GameOfLife = (function () {
 	   $(that).trigger('generationChanged', generationCount);
 	};
 
-    gameOfLife.prototype.start = function () {
-        timer = setInterval(function() {
-            var someAreLiving = that.calculateNextGen();
-            that.switchToNextGen();
-            if (!someAreLiving)
-                gameOver();
-        }, 100);
-        resetGenerationCount();
+	gameOfLife.prototype.start = function () {
+	    resetGenerationCount();
+        timer = setInterval(playNextGen, 100);
         setStatus('running');
         $(this).trigger('started');
+    };
+
+    gameOfLife.prototype.resume = function () {
+        timer = setInterval(playNextGen, 100);
+        setStatus('running');
+        $(this).trigger('started');
+    };
+
+    var playNextGen = function () {
+        var someAreLiving = that.calculateNextGen();
+        that.switchToNextGen();
+        if (!someAreLiving)
+            gameOver();
     };
 
     var setStatus = function (newStatus) {
@@ -316,7 +331,8 @@ var GameOfLife = (function () {
 
     gameOfLife.prototype.reset = function () {
         this.resetPlayground();
-		resetGenerationCount();
+        resetGenerationCount();
+        setStatus('reset');
     };
 
     gameOver = function () {

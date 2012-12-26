@@ -48,6 +48,10 @@ section#header {
     color: white;
 }
 
+#btnResume {
+    background-color: lightgreen;
+}
+
 #btnPause {
     background-color: yellow;
 }
