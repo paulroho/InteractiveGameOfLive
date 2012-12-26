@@ -30,6 +30,10 @@
 	$(game).bind('generationChanged', function(event, generation) {
 		$('#generationInfo').text("Generation #" + generation);
 	});
+	$(game).bind('statusChanged', function () {
+	    $('#status').text('The game is ' + game.status + '.');
+	});
+
     game.initPlayground();
 
     $('#btnStart').click(function () {
@@ -84,7 +88,8 @@ var GameOfLife = (function () {
     var nextGen;
     var timer;
     var generationCount;
-	var that;
+    var that;
+    this.status;
     
     function gameOfLife(rownum, colnum) {
 		that = this;
@@ -93,6 +98,7 @@ var GameOfLife = (function () {
         matrix = new Array(1);
         currGen = 'init val currGen';
         nextGen = 'init val nextGen';
+        this.status = 'reset';
     }
     
     gameOfLife.prototype.initPlayground = function () {
@@ -111,6 +117,7 @@ var GameOfLife = (function () {
         matrix[currGen] = initMatrix();
         matrix[nextGen] = initMatrix();
 		resetGenerationCount();
+		setStatus('reset');
     };
 	
 	var resetGenerationCount = function(){
@@ -130,7 +137,14 @@ var GameOfLife = (function () {
             if (!someAreLiving)
                 gameOver();
         }, 100);
+        resetGenerationCount();
+        setStatus('running');
         $(this).trigger('started');
+    };
+
+    var setStatus = function (newStatus) {
+        that.status = newStatus;
+        $(that).trigger('statusChanged');
     };
 
     var initMatrix = function() {
@@ -296,6 +310,7 @@ var GameOfLife = (function () {
     
     gameOfLife.prototype.pause = function() {
         clearInterval(timer);
+        setStatus('paused');
         $(this).trigger('paused');
     };
 
@@ -306,8 +321,8 @@ var GameOfLife = (function () {
 
     gameOver = function () {
         clearInterval(timer);
+        setStatus('over');
         $(that).trigger('gameOver', generationCount);
-        resetGenerationCount();
     };
 
     return gameOfLife;
