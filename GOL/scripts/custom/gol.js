@@ -139,9 +139,7 @@ var GameOfLife = (function () {
 
 	gameOfLife.prototype.start = function () {
 	    resetGenerationCount();
-        timer = setInterval(playNextGen, 100);
-        setStatus('running');
-        $(this).trigger('started');
+	    this.resume();
     };
 
     gameOfLife.prototype.resume = function () {
