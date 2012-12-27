@@ -64,6 +64,16 @@
         game.invertPlayground();
     });
 
+    $('#btnTogglePopulation').click(function () {
+        $('#populationFlyout').slideToggle();
+    });
+
+    $('#btnLoadPopulation').click(function () {
+        var population = $('#populationList');
+
+        game.loadPopulation(population.val());
+    });
+
     $('#playground').delegate('td', 'click', function () {
         var colIdx = $(this).index();
         var rowIdx = $(this).parent().index();
@@ -71,6 +81,14 @@
     });
 });
 
+$(document).mouseup(function (e) {
+    var flyout = $('#populationFlyout');
+    var toggle = $('#btnTogglePopulation');
+
+    if (!flyout.is(e.target) && flyout.has(e.target).length === 0) {
+        flyout.slideUp();
+    }
+});
 
 /*
 Game of Life
@@ -337,6 +355,10 @@ var GameOfLife = (function () {
         clearInterval(timer);
         setStatus('over');
         $(that).trigger('gameOver', generationCount);
+    };
+
+    gameOfLife.prototype.loadPopulation = function (population) {
+        alert('load population ' + population);
     };
 
     return gameOfLife;

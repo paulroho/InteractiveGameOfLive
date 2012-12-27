@@ -56,6 +56,19 @@ section#header {
     background-color: yellow;
 }
 
+#populationFlyout {
+    background-color:#333;
+    border:1px solid white;
+    position:absolute;
+    z-index:100;
+    display:none;
+    padding:5px;
+}
+
+    #populationFlyout p {
+        margin:auto;
+    }
+
 #infoBlock {
 	float:left;
 }
