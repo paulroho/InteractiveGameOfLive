@@ -357,8 +357,64 @@ var GameOfLife = (function () {
         $(that).trigger('gameOver', generationCount);
     };
 
-    gameOfLife.prototype.loadPopulation = function (population) {
-        alert('load population ' + population);
+    gameOfLife.prototype.loadPopulation = function (populationName) {
+        var data = getPopulationData(populationName);
+
+        this.reset();
+        loadPopulationData(data);
+    };
+
+    getPopulationData = function (populationName) {
+        switch (populationName) {
+            case 'resolvingPhils':
+                return [
+                    [10, [20]],
+                    [11, [20]],
+                    [12, [20]],
+                    [14, [16, 17, 18, 20, 22, 23, 24]],
+                    [16, [20]],
+                    [17, [20]],
+                    [18, [20]]
+                ];
+            case 'zappelPhilipp':
+                return [
+                    [10, [20, 21, 22]]
+                ];
+            case 'moverRightDown':
+                return [
+                    [10, [21]],
+                    [11, [22]],
+                    [12, [20, 21, 22]],
+                ];
+            case 'lineOf6':
+                return [
+                    [10, [20,21,22,23,24,25]]
+                ];
+            case 'oval':
+                return [
+                    [10, [21, 22]],
+                    [11, [20, 23]],
+                    [12, [21, 22]]
+                        ];
+            case 'square':
+                return [
+                    [10, [20, 21]],
+                    [11, [20, 21]]
+                ];
+            default:
+                return [];
+        }
+    };
+
+    loadPopulationData = function (populationData) {
+        for (var r = 0; r < populationData.length; r++) {
+            var rowIdx = populationData[r][0];
+            var colIdxs = populationData[r][1];
+            for (var c = 0; c < colIdxs.length; c++) {
+                var colIdx = colIdxs[c];
+                letLive(rowIdx, colIdx);
+            }
+        }
     };
 
     return gameOfLife;
