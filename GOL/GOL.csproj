@@ -58,9 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="gol.css" />
-    <Content Include="scripts\custom\gol.js" />
+    <Content Include="scripts\gol.js" />
     <Content Include="index.html" />
-    <Content Include="scripts\jquery-1.8.3.min.js" />
+    <Content Include="scripts\libs\jQuery\jquery-1.8.3.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
