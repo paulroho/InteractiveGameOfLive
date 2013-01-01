@@ -1,7 +1,11 @@
-﻿var Playground = (function () {
+﻿define('playground', [], function (Playground) {
+    var Playground = (function () {
 
-    playground = function () {
-    };
+        playground = function () {
+        };
 
-    return playground;
-})();
+        return playground;
+    })();
+
+    return Playground;
+});

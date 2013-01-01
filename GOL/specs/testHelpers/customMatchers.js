@@ -1,7 +1,7 @@
 ﻿beforeEach(function () {
     this.addMatchers({
         toBeEnabled: function () {
-            console.log('toBeEnabled()');
+            //console.log('toBeEnabled()');
             var element = this.actual;
 
             if (element.length === 0)
